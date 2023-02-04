@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { usePage } from '../src'
 
 describe('function to request data and page break', () => {
-  const { current, data, nextPage, prePage } = usePage<{ title: string }>(mock)
+  const { current, data, nextPage, prePage, updateData } = usePage<{ title: string }>(mock)
+  updateData()
 
   it('should be 1', () => {
     expect(current.value).toMatchInlineSnapshot('1')

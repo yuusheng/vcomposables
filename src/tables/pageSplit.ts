@@ -1,4 +1,4 @@
-import { ref, unref } from 'vue'
+import { onMounted, ref, unref } from 'vue'
 import type { MaybeRef } from '~/utils'
 
 interface Param {
@@ -40,7 +40,6 @@ export function usePage<U, T extends BaseRes<U> = BaseRes<U>>(
     data.value = res.list
     total.value = res.total
   }
-  updateData()
 
   function prePage() {
     if (current.value === 0)
@@ -55,6 +54,10 @@ export function usePage<U, T extends BaseRes<U> = BaseRes<U>>(
     current.value++
     updateData()
   }
+
+  onMounted(() => {
+    updateData()
+  })
 
   return {
     current,
