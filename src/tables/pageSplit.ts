@@ -21,14 +21,14 @@ interface BaseData<T> {
   list: T[]
 }
 
-export function usePage<U, T extends BaseRes<U> = BaseRes<U>>(
-  reqFn: (param: Param) => Promise<T>,
+export function usePage<T, U extends BaseRes<T> = BaseRes<T>>(
+  reqFn: (param: Param) => Promise<U>,
   param?: RefParam<Param>,
 ) {
   const current = ref(unref(param?.page) | 1)
   const total = ref(0)
 
-  const data = ref<U[]>()
+  const data = ref<T[]>()
   async function updateData() {
     const unrefParam = <Param>Object
       .entries({ ...param, page: current.value })
